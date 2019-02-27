@@ -1,112 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+		<title>ArcGIS Web Application</title>
+		<link rel="shortcut icon" href="images/shortcut.ico">
+		<!--[if IE 8]>
+    <link rel="stylesheet" type="text/css"  href="jimu.js/css/jimu-ie.css" />
+    <![endif]-->
+		<style type="text/css">
+		*{box-sizing: border-box;}
+      body,html {
+        width:100%;
+        height:100%;
+        margin:0;
+        padding:0;
+        overflow:hidden;
+      }
+      #main-loading{
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        overflow: hidden;
+      }
+      #main-loading #ie-note{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+      #main-loading #ie-note {
+        width: 586px;
+        height: 253px;
+        background-image: url('images/notes.png');
+        padding: 0 30px 40px 30px;
+        font-size: 14px;
+        color: #596679;
+      }
+      #ie-note .hint-title{
+        height: 40px;
+        line-height: 48px;
+        text-align: left;
+        font-weight: bold;
+      }
+      #ie-note .hint-img{
+        background-image: url('images/hint.png');
+        background-position: left;
+        padding-left: 40px;
+        margin-top: 20px;
+        background-repeat: no-repeat;
+        height: 30px;
+        text-align: left;
+        line-height: 30px;
+        font-weight: bold;
+      }
+      #ie-note span{
+        display: block;
+        line-height: 14px;
+      }
+      #main-page{
+        display: none;
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
 
-<head>
+      #jimu-layout-manager{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+      }
+		</style>
+    <link rel="stylesheet" type="text/css" href="configs/loading/loading.css" />
+		<script>
+			/*******************************
+			* This is the function you can modify to customize the loading page
+			* This function will be invoked when one resource is loaded.
+			********************************/
+			// var progress;
+			// function loadingCallback(url, i, count) {
+			// 	var loading = document.getElementById('main-loading-bar');
+			// 	loading.setAttribute('title', url);
+			//   if(!progress){
+			//     progress = document.createElement('div');
+			//     progress.setAttribute('class', 'loading-progress');
+			//     loading.appendChild(progress);
+			//   }
+			//   progress.style.width = (((i - 1)/count) * 100) + '%';
+			// }
+		</script>
+	</head>
+	<body class="claro jimu-main-font">
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<div id="main-loading">
 
-  <title>GTVM Maintenance</title>
+			<!-- This is section you can modify to customize the loading page -->
+			<div id="app-loading"></div>
+      <div id="loading-gif"></div>
 
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-
-
-<style>
-	.fakeimg {
-    height: 100%;
-    background: #aaa;
-  }
-  .container-fluid {
-	height: 100%;
-  }
-  </style>
-
-</head>
-
-<body>
-
-<!--Navigation bar-->
-
-<!--<nav class="navbar navbar-expand-sm bg-dark navbar-dark">-->
-<nav class="navbar navbar-expand-sm bg-light navbar-light">
-  <a class="navbar-brand" href="#">GTVM Maintenance</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>    
-    </ul>
-  </div>  
-</nav>
-
-<div class="container-fluid" style="margin-top:10px">
-	<div class="row">
-		<div class="col-xl-2" style="background-color:white;">Menu
-			<ul class="nav nav-pills flex-column">
-				<li class="nav-item">
-					 <a class="nav-link active" href="#">Active</a>
-				</li>
-				<li class="nav-item">
-					 <a class="nav-link" href="#">GTVM Maintenance QC</a>
-				</li>
-				<li class="nav-item">
-					 <a class="nav-link" href="#">GTVM Maintenance Owners</a>
-				</li>
-				<li class="nav-item">
-					 <a class="nav-link disabled" href="#">Disabled</a>
-				</li>
-			</ul>
-			<hr class="d-xl-none">
+			<!-- //////////////////    END    ////////////////////////////// -->
+			<div id="ie-note" style="display:none;">
+        <div class="hint-title">Error</div>
+        <div class="hint-img">Your browser is currently not supported.</div>
+        <p class="hint-text">
+          <span>
+            Please note that creating presentations is not supported in Internet Explorer versions 6, 7.
+          </span>
+          <br>
+          <span>
+            We recommend upgrading to the latest Internet Explorer, Google Chrome, or Firefox.
+          </span>
+          <br>
+          <span>
+            If you are using IE 8 or later, make sure you turn off "Compatibility View".
+          </span>
+        </p>
+      </div>
 		</div>
-		
-		<div class="col-xl-10" style="background-color:white;">x%
-		  <!--Navigation Panes-->
-		  <ul class="nav nav-tabs" role="tablist">
-			<li class="nav-item">
-				<a class="nav-link active" data-toggle="tab" href="#home">YTD Overall</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" data-toggle="tab" href="#menu1">Monthly Forecast Patrol</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" data-toggle="tab" href="#menu2">Monthly Forecast Treat</a>
-			</li>
-		</ul>
-		<!-- Tab panes -->
-			<div class="tab-content">
-				<div class="tab-pane container active" id="home">
-					...
-					...
-					<div class="fakeimg">Fake Image</div>
-				</div>
-				<div class="tab-pane container fade" id="menu1">.!!!!
-					<div class="fakeimg">Fake Image</div>
-				</div>
-				<div class="tab-pane container fade" id="menu2">?????
-					<div class="fakeimg">Fake Image</div>
-				</div>
-			</div>
+		<div id="main-page">
+			<div id="jimu-layout-manager"></div>
 		</div>
-	</div>
-</div>
 
-
-</body>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-
-
-
+		<script src="env.js"></script>
+		<script type="text/javascript" src="simpleLoader.js"></script>
+		<script type="text/javascript" src="init.js"></script>
+	</body>
 </html>
